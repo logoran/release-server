@@ -1,6 +1,7 @@
 import GitHubApi from 'github4';
 import config from '../config';
 import request from 'request';
+const debug = require('debug')('logoran-rs:github');
 
 const github = new GitHubApi(config.github.api);
 if (config.github.token) {
@@ -94,6 +95,7 @@ export function getReleaseByTag(tag) {
 }
 
 export function getLatestRelease(channel = config.channels[0]) {
+  debug('getLatestRelease %s', channel);
   if (channel == config.channels[0]) {
     // Request the latest release directly
     return new Promise(function(resolve, reject) {
